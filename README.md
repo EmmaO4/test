@@ -1,2 +1,4 @@
 # test
-Test repository for Github literacy
+Test repo for Github literacy
+
+using to test Java constructs and ideas
