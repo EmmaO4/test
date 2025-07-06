@@ -10,6 +10,6 @@ for num in nums:
     else:
         seen[num] = 1 # key, value = num, 1 -- for the first time seeing this digit
 
-for num, count in seen.items():
+for num, count in seen.items(): 
     print(f"num: {num}, count: {count}")
 
