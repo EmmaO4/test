@@ -18,6 +18,36 @@ def insert(root, key):
         root.left = insert(root.left, key)
     return root
 
+def get_successor(curr):
+    curr = curr.right
+    while curr is not None and curr.left is not None:
+        curr = curr.left
+    return curr
+
+def del_node(root, x):
+  
+    # Base case
+    if root is None:
+        return root
+
+    if root.key > x:
+        root.left = del_node(root.left, x)
+    elif root.key < x:
+        root.right = del_node(root.right, x)
+        
+    else:
+        if root.left is None:
+            return root.right
+
+        if root.right is None:
+            return root.left
+
+        succ = get_successor(root)
+        root.key = succ.key
+        root.right = del_node(root.right, succ.key)
+        
+    return root
+
 # def insert(root, key):
 #     temp = Node(key)
 
