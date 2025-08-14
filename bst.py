@@ -48,6 +48,27 @@ def del_node(root, x):
         
     return root
 
+def minValue(root):
+    if root is None:
+        return -1
+
+    sorted_inorder = []  
+
+    inorder(root, sorted_inorder)
+
+    return sorted_inorder[0]
+
+# same as min but return last elem
+def maxValue(root):
+    if root is None:
+        return -1
+
+    sorted_inorder = []  
+
+    inorder(root, sorted_inorder)
+
+    return sorted_inorder[-1]
+
 # def insert(root, key):
 #     temp = Node(key)
 
