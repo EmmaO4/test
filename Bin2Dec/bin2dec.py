@@ -20,6 +20,7 @@ TWO_POWER_SEVEN = 128
 TWO_POWER_EIGHT = 256
 
 # check if decimal is between two base 2 ranges
+# subtract the highest minimum base 2 without going under decimal 
 def convert_dec_to_binary(decimal):
     if decimal < TWO_POWER_ZERO or decimal > TWO_POWER_EIGHT:
         return None
