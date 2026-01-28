@@ -52,15 +52,15 @@ def convert_dec_to_binary(decimal):
         index_ref_list = []
         index = 8   
         for i in base_two_list[::-1]:
-            if helper_decimal - base_two_list[i] < 0:
+            if helper_decimal - i < 0:       # (120) - base_two_list[256] < 0
                 index -= 1
                 continue
             else:
                 index_ref_list.append(index)
-                helper_decimal = helper_decimal - base_two_list[i]
+                index -= 1
+                helper_decimal = helper_decimal - i
         print(index_ref_list)
         return index_ref_list
-
 
     if decimal > TWO_POWER_EIGHT:
         return None                         # want this to return error message
@@ -91,11 +91,18 @@ def convert_dec_to_binary(decimal):
         binary_table = [0]*modify
         print(binary_table)
     if range_seven:                         # input = 120, output = 1111000
-        modify = 7
-        binary_table = [0]*modify
-        calculate_highest_min(decimal)
+        # modify = 7
+        # binary_table = [0]*modify
+        binary_table = [0]*8
 
-        # print(binary_table)
+        index_table = calculate_highest_min(decimal)
+        
+        for i in range(len(binary_table)):
+            for j in range(len(index_table)):
+                if index_table[j] == binary_table.index(i):
+                    binary_table[i] += 1
+        print(binary_table)
+        
     if range_eight:                         # input = 217, output = 11011001
         modify = 8
         binary_table = [0]*modify
