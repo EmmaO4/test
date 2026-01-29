@@ -52,15 +52,28 @@ def convert_dec_to_binary(decimal):
         index_ref_list = []
         index = 8   
         for i in base_two_list[::-1]:
-            if helper_decimal - i < 0:       # (120) - base_two_list[256] < 0
+            if helper_decimal - i < 0:       # (120) - (256) < 0
                 index -= 1
                 continue
             else:
                 index_ref_list.append(index)
                 index -= 1
                 helper_decimal = helper_decimal - i
-        print(index_ref_list[::-1])
         return index_ref_list[::-1]
+
+    def convert(helper_decimal):
+        binary_table = [0]*8
+        index_table = calculate_highest_min(helper_decimal)
+        binary = ''
+        for i in range(len(binary_table)):
+            for j in range(len(index_table)):
+                # binary_table index value += 1 where index matches index value of index_table 
+                if i == index_table[j]:
+                    binary_table[i - 1] += 1    # this works but index error when using other user inputs that match at binary_table index 0
+        for bit in binary_table:
+            binary += str(bit)
+        
+        print(f'{decimal} to binary: {binary}')
 
 
     if decimal > TWO_POWER_EIGHT:
@@ -72,13 +85,9 @@ def convert_dec_to_binary(decimal):
     if decimal == range_one:                           # input = 1, output = 1
         print(binary_table_for_range_one)
     if range_two:                           # input = 2, output = 10
-        modify = 2
-        binary_table = [0]*modify
-        print(binary_table)
+        convert(decimal)
     if range_three:                         # input = 5, output = 101
-        modify = 3
-        binary_table = [0]*modify
-        print(binary_table)
+        convert(decimal)
     if range_four:                          # input = 12, output = 1100
         modify = 4
         binary_table = [0]*modify
@@ -92,18 +101,7 @@ def convert_dec_to_binary(decimal):
         binary_table = [0]*modify
         print(binary_table)
     if range_seven:                         # input = 120, output = 1111000
-        # modify = 7
-        # binary_table = [0]*modify
-        binary_table = [0]*8
-        index_table = calculate_highest_min(decimal)
-        print(binary_table)
-        for i in range(len(binary_table)):
-            for j in range(len(index_table)):
-                # binary_table index value += 1 where index matches index value of index_table 
-                if i == index_table[j]:
-                    binary_table[i] += 1
-
-        #print(binary_table)
+        convert(decimal)
         
     if range_eight:                         # input = 217, output = 11011001
         modify = 8
@@ -111,7 +109,6 @@ def convert_dec_to_binary(decimal):
         print(binary_table)
     
     
-
 user_input = int(input("Enter decimal integer (0 - 256) to convert to binary number: "))
 
 convert_dec_to_binary(user_input)
