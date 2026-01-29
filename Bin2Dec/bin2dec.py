@@ -59,8 +59,9 @@ def convert_dec_to_binary(decimal):
                 index_ref_list.append(index)
                 index -= 1
                 helper_decimal = helper_decimal - i
-        print(index_ref_list)
-        return index_ref_list
+        print(index_ref_list[::-1])
+        return index_ref_list[::-1]
+
 
     if decimal > TWO_POWER_EIGHT:
         return None                         # want this to return error message
@@ -94,14 +95,15 @@ def convert_dec_to_binary(decimal):
         # modify = 7
         # binary_table = [0]*modify
         binary_table = [0]*8
-
         index_table = calculate_highest_min(decimal)
-        
+        print(binary_table)
         for i in range(len(binary_table)):
             for j in range(len(index_table)):
-                if index_table[j] == binary_table.index(i):
+                # binary_table index value += 1 where index matches index value of index_table 
+                if i == index_table[j]:
                     binary_table[i] += 1
-        print(binary_table)
+
+        #print(binary_table)
         
     if range_eight:                         # input = 217, output = 11011001
         modify = 8
