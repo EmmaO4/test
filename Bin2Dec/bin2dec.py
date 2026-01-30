@@ -65,37 +65,53 @@ def convert_dec_to_binary(decimal):
         binary_table = [0]*8
         # print(binary_table)
         index_table = calculate_highest_min(helper_decimal)
-        binary = ''
+        
         for i in range(len(binary_table)):
             for j in range(len(index_table[::-1])):
                 # binary_table index value += 1 where index matches index value of index_table 
                 if i == index_table[j]:     # (0) == (6) 
                     binary_table[i - 1] += 1    # this works but index error when using other user inputs that match at binary_table index 0
         
+        binary_string = ''
         # print(binary_table)
         for bit in binary_table[::-1]:
-            binary += str(bit)
+            binary_string += str(bit)
         
+        binary = ''
+        indx = 0
+        # print(binary_string)
+
+        if binary_string.startswith('0'):
+            i = 0
+            while binary_string[i] == '0':
+                i += 1
+                if binary_string[i] == '1':
+                    indx = i
+                    break
+        # print(f'print starting from index: {indx} \nbinary: {binary_string}')
+        for i in range(indx, len(binary_string)):
+            binary += str(binary_string[i])
         print(f'{decimal} to binary: {binary}')
 
 
     if decimal > TWO_POWER_SEVEN:
         return None                         # want this to return error message
     if decimal <= 0: 
-        return 0
+        print(f'{decimal} to binary: {0}')  # input = 0, output = 0
     # this bugs cause range_one is a truthy value that always outputs true > this will print in addition to resulting range from user input
-    # "if true:" -- where 1 is always true
-    if decimal == range_one:                           # input = 1, output = 1
-        print('1')
-    if range_two:                           # input = 2, output = 10
+    # "if true:" -- where 1 is always true                 
+
+    if decimal == range_one:                # input = 1, output = 1
+        print(f'{decimal} to binary: {1}')
+    if range_two:                           # input = 2, output = 00000010 = 10
         convert(decimal)
-    if range_three:                         # input = 5, output = 101
+    if range_three:                         # input = 5, output = 00000101 = 101
         convert(decimal)
-    if range_four:                          # input = 12, output = 1100
+    if range_four:                          # input = 12, output = 00001100 = 1100
         convert(decimal)
-    if range_five:                          # input = 20, output = 10100
+    if range_five:                          # input = 20, output = 00010100 = 10100
         convert(decimal)
-    if range_six:                           # input = 55, output = 110111
+    if range_six:                           # input = 55, output = 00110111 = 110111
         convert(decimal)
     if range_seven:                         # input = 120, output = 1111000
         convert(decimal)
@@ -105,10 +121,11 @@ user_input = int(input("Enter decimal integer (0 - 126) to convert to binary num
 
 convert_dec_to_binary(user_input)
 
-
 """
 TODO
     add functions:
         binary calculator 
-        elim leading 0s
+        optimize code heavy
+    DONE
+        elim leading 0s  
 """
