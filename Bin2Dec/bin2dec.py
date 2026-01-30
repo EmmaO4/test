@@ -15,9 +15,9 @@ Doc link: https://github.com/florinpop17/app-ideas/blob/master/Projects/1-Beginn
 8   =   2^3
 16  =   2^4
 32  =   2^5
-64  =   2^6             8       7       6       5       4       3       2       1       0              
-128 =   2^7    ->       256     128     64      32      16      8       4       2       1 
-256 =   2^8    |        0       0        1       1      1       1       0       0       0
+64  =   2^6             7      6       5       4       3       2       1       0              
+128 =   2^7    ->      128     64      32      16      8       4       2       1 
+256 =   2^8    |        0       0       1      1       0       1       1       1
                ^
 user_input = 120,   base two = 2^7 - 2^3 = 120
 user_input = 155,   base two = 2^8 - 2^6 - 2^5 - 2^2 - 2^0 = 155
@@ -29,8 +29,7 @@ TWO_POWER_THREE = 8
 TWO_POWER_FOUR  = 16
 TWO_POWER_FIVE  = 32
 TWO_POWER_SIX   = 64
-TWO_POWER_SEVEN = 128
-TWO_POWER_EIGHT = 256    
+TWO_POWER_SEVEN = 128 
 
 binary_table_for_range_one = [0]
 # check if decimal is between two base 2 ranges
@@ -42,73 +41,74 @@ def convert_dec_to_binary(decimal):
     range_four =    ((decimal >= TWO_POWER_THREE) and (decimal < TWO_POWER_FOUR))       #  [8 - 15]
     range_five =    ((decimal >= TWO_POWER_FOUR) and (decimal < TWO_POWER_FIVE))        #  [16 - 31]
     range_six =     ((decimal >= TWO_POWER_FIVE) and (decimal < TWO_POWER_SIX))         #  [32 - 63]
-    range_seven =   ((decimal >= TWO_POWER_SIX) and (decimal < TWO_POWER_SEVEN))        #  [64 - 127]
-    range_eight =   ((decimal >= TWO_POWER_SEVEN) and (decimal <= TWO_POWER_EIGHT))     #  [128 - 256]
+    range_seven =   ((decimal >= TWO_POWER_SIX) and (decimal <= TWO_POWER_SEVEN))        #  [64 - 128]
     
     # helper fuction to calc highest minimum needed to compute recursive subtraction of base-two int of user input
     def calculate_highest_min(decimal):
         helper_decimal = decimal
-        base_two_list = [TWO_POWER_ZERO, TWO_POWER_ONE, TWO_POWER_TWO, TWO_POWER_THREE, TWO_POWER_FOUR, TWO_POWER_FIVE, TWO_POWER_SIX, TWO_POWER_SEVEN, TWO_POWER_EIGHT]
+        base_two_list = [TWO_POWER_ZERO, TWO_POWER_ONE, TWO_POWER_TWO, TWO_POWER_THREE, TWO_POWER_FOUR, TWO_POWER_FIVE, TWO_POWER_SIX, TWO_POWER_SEVEN]
         index_ref_list = []
-        index = 8   
+        index = 8
+        # print(base_two_list[::-1])
         for i in base_two_list[::-1]:
-            if helper_decimal - i < 0:       # (120) - (256) < 0
+            if helper_decimal - i < 0:       # (55) - (126) < 0
                 index -= 1
                 continue
             else:
                 index_ref_list.append(index)
                 index -= 1
                 helper_decimal = helper_decimal - i
+        # print(index_ref_list)
         return index_ref_list[::-1]
 
     def convert(helper_decimal):
         binary_table = [0]*8
+        # print(binary_table)
         index_table = calculate_highest_min(helper_decimal)
         binary = ''
         for i in range(len(binary_table)):
-            for j in range(len(index_table)):
+            for j in range(len(index_table[::-1])):
                 # binary_table index value += 1 where index matches index value of index_table 
-                if i == index_table[j]:
+                if i == index_table[j]:     # (0) == (6) 
                     binary_table[i - 1] += 1    # this works but index error when using other user inputs that match at binary_table index 0
-        for bit in binary_table:
+        
+        # print(binary_table)
+        for bit in binary_table[::-1]:
             binary += str(bit)
         
         print(f'{decimal} to binary: {binary}')
 
 
-    if decimal > TWO_POWER_EIGHT:
+    if decimal > TWO_POWER_SEVEN:
         return None                         # want this to return error message
     if decimal <= 0: 
         return 0
     # this bugs cause range_one is a truthy value that always outputs true > this will print in addition to resulting range from user input
     # "if true:" -- where 1 is always true
     if decimal == range_one:                           # input = 1, output = 1
-        print(binary_table_for_range_one)
+        print('1')
     if range_two:                           # input = 2, output = 10
         convert(decimal)
     if range_three:                         # input = 5, output = 101
         convert(decimal)
     if range_four:                          # input = 12, output = 1100
-        modify = 4
-        binary_table = [0]*modify
-        print(binary_table)
+        convert(decimal)
     if range_five:                          # input = 20, output = 10100
-        modify = 5
-        binary_table = [0]*modify
-        print(binary_table)
+        convert(decimal)
     if range_six:                           # input = 55, output = 110111
-        modify = 6
-        binary_table = [0]*modify
-        print(binary_table)
+        convert(decimal)
     if range_seven:                         # input = 120, output = 1111000
         convert(decimal)
-        
-    if range_eight:                         # input = 217, output = 11011001
-        modify = 8
-        binary_table = [0]*modify
-        print(binary_table)
+            
     
-    
-user_input = int(input("Enter decimal integer (0 - 256) to convert to binary number: "))
+user_input = int(input("Enter decimal integer (0 - 126) to convert to binary number: "))
 
 convert_dec_to_binary(user_input)
+
+
+"""
+TODO
+    add functions:
+        binary calculator 
+        elim leading 0s
+"""
