@@ -1,4 +1,6 @@
 """
+Bruh I did this backwards
+
 Bin2Dec allows the user to enter strings of up to 8 binary digits, 0's and 1's, in any sequence and then displays its decimal equivalent.
 
 This challenge requires that the developer implementing it follow these constraints:
@@ -22,6 +24,8 @@ Doc link: https://github.com/florinpop17/app-ideas/blob/master/Projects/1-Beginn
 user_input = 120,   base two = 2^7 - 2^3 = 120
 user_input = 155,   base two = 2^8 - 2^6 - 2^5 - 2^2 - 2^0 = 155
 """
+import time
+
 TWO_POWER_ZERO  = 1
 TWO_POWER_ONE   = 2
 TWO_POWER_TWO   = 4
@@ -95,7 +99,7 @@ def convert_dec_to_binary(decimal):
 
 
     if decimal > TWO_POWER_SEVEN:
-        return None                         # want this to return error message
+        print("Invalid input")                         # want this to return error message
     if decimal <= 0: 
         print(f'{decimal} to binary: {0}')  # input = 0, output = 0
     # this bugs cause range_one is a truthy value that always outputs true > this will print in addition to resulting range from user input
@@ -119,7 +123,14 @@ def convert_dec_to_binary(decimal):
     
 user_input = int(input("Enter decimal integer (0 - 126) to convert to binary number: "))
 
+start_time = time.perf_counter()            # start timer
+
 convert_dec_to_binary(user_input)
+
+end_time = time.perf_counter()              # end timer
+elapsed_time = end_time - start_time
+
+print(f"Program runtime: {elapsed_time:.8f} seconds")
 
 """
 TODO
@@ -129,3 +140,5 @@ TODO
     DONE
         elim leading 0s  
 """
+# runtime: O(1) 
+# space:   O(1) 
