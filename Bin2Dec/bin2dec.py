@@ -38,7 +38,7 @@ TWO_POWER_SEVEN = 128
 binary_table_for_range_one = [0]
 # check if decimal is between two base 2 ranges
 # subtract the highest minimum base 2 without going under decimal 
-def convert_dec_to_binary(decimal):
+def convert_decimal_to_binary(decimal):
     range_one =     TWO_POWER_ZERO                                                      #  [1] 
     range_two =     ((decimal >= TWO_POWER_ONE) and (decimal < TWO_POWER_TWO))          #  [2 - 3] 
     range_three =   ((decimal >= TWO_POWER_TWO) and (decimal < TWO_POWER_THREE))        #  [4 - 7]
@@ -97,7 +97,6 @@ def convert_dec_to_binary(decimal):
             binary += str(binary_string[i])
         print(f'{decimal} to binary: {binary}')
 
-
     if decimal > TWO_POWER_SEVEN:
         print("Invalid input")                         # want this to return error message
     if decimal <= 0: 
@@ -120,12 +119,18 @@ def convert_dec_to_binary(decimal):
     if range_seven:                         # input = 120, output = 1111000
         convert(decimal)
             
-    
+def convert_binary_to_decimal(binary):
+    initial_list = []
+    for bit in str(binary):
+        initial_list.append(int(bit))
+    print(initial_list)
+
 user_input = int(input("Enter decimal integer (0 - 126) to convert to binary number: "))
 
 start_time = time.perf_counter()            # start timer
 
-convert_dec_to_binary(user_input)
+convert_binary_to_decimal(user_input)
+# convert_decimal_to_binary(user_input)
 
 end_time = time.perf_counter()              # end timer
 elapsed_time = end_time - start_time
@@ -134,6 +139,7 @@ print(f"Program runtime: {elapsed_time:.8f} seconds")
 
 """
 TODO
+    research optimal algorithms for his prob - practice those
     add functions:
         binary calculator 
         optimize code heavy
