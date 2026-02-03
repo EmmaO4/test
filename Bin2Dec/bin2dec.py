@@ -1,5 +1,5 @@
 """
-Bruh I did this backwards
+Bruh I did this backwards. added a convert_binary_to_decimal() function to complete this correctly works correctly. 
 
 Bin2Dec allows the user to enter strings of up to 8 binary digits, 0's and 1's, in any sequence and then displays its decimal equivalent.
 
@@ -123,7 +123,51 @@ def convert_binary_to_decimal(binary):
     initial_list = []
     for bit in str(binary):
         initial_list.append(int(bit))
-    print(initial_list)
+    # print(initial_list)
+
+    # check index count of initial_list 
+    if len(initial_list) < 8:
+        index_count = 8 - len(initial_list) 
+        rev_initial_list = initial_list[::-1]
+        
+        # flip initial_list to append 0 bits to end then flip again to keep original value in binary
+        for i in range(index_count):
+            rev_initial_list.append(0)
+        initial_list = rev_initial_list[::-1]
+        # print(initial_list)
+
+        string_binary = ''
+
+        for digit in initial_list:
+            string_binary += str(digit)
+            # int_binary = int(list_to_int)
+
+        # print(f'binary in string format: {string_binary}')
+
+        # assign initial_list index to two_base values from powers: 0 - 7
+        initial_list[0] = TWO_POWER_SEVEN
+        initial_list[1] = TWO_POWER_SIX
+        initial_list[2] = TWO_POWER_FIVE
+        initial_list[3] = TWO_POWER_FOUR
+        initial_list[4] = TWO_POWER_THREE
+        initial_list[5] = TWO_POWER_TWO
+        initial_list[6] = TWO_POWER_ONE
+        initial_list[7] = TWO_POWER_ZERO
+
+        # read initial_list -> for every index where bit == 1: add the two_base power value
+        truthy_bypass = 1
+        binary_rolling_sum = 0
+
+        # print(f'binary first bit: {string_binary[5]}')
+        # print(f'initial list first bit: {initial_list[5]}')
+        
+        # calc bit sum for decimal conversion
+        for i in range(len(string_binary)):
+            # print(string_binary[i])
+            if string_binary[i] == str(truthy_bypass): # truthy didn't work here?
+                binary_rolling_sum += initial_list[i]
+                # print(f'{binary_rolling_sum} + {initial_list[i]}')
+        print(f'{binary} to decimal: {binary_rolling_sum}')
 
 user_input = int(input("Enter decimal integer (0 - 126) to convert to binary number: "))
 
@@ -139,7 +183,9 @@ print(f"Program runtime: {elapsed_time:.8f} seconds")
 
 """
 TODO
+    make CLI to select between bin to dec or vice versa
     research optimal algorithms for his prob - practice those
+    
     add functions:
         binary calculator 
         optimize code heavy
