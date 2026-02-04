@@ -169,21 +169,34 @@ def convert_binary_to_decimal(binary):
                 # print(f'{binary_rolling_sum} + {initial_list[i]}')
         print(f'{binary} to decimal: {binary_rolling_sum}')
 
-user_input = int(input("Enter decimal integer (0 - 126) to convert to binary number: "))
+print("MENU")
+print("1. Convert Binary to Decimal")
+print("2. Convert Decimal to Binary")
+print("0. Exit")
+print("********************\n")
+user_input = int(input("Enter option number: "))
 
-start_time = time.perf_counter()            # start timer
+while user_input != 0:
+    if user_input == 1:
+        binary_convert = input("Enter Binary: ")
+        convert_binary_to_decimal(binary_convert)
+        break
+    elif user_input == 2:
+        decimal_convert = str(input("Enter Decimal: "))
+        convert_decimal_to_binary(decimal_convert)
+        break
+    else:
+        print("invalid input ")
 
-convert_binary_to_decimal(user_input)
-# convert_decimal_to_binary(user_input)
+# start_time = time.perf_counter()            # start timer
+# # program goes here
+# end_time = time.perf_counter()              # end timer
+# elapsed_time = end_time - start_time
 
-end_time = time.perf_counter()              # end timer
-elapsed_time = end_time - start_time
-
-print(f"Program runtime: {elapsed_time:.8f} seconds")
+# print(f"Program runtime: {elapsed_time:.8f} seconds")
 
 """
 TODO
-    make CLI to select between bin to dec or vice versa
     research optimal algorithms for his prob - practice those
     
     add functions:
@@ -191,6 +204,7 @@ TODO
         optimize code heavy
     DONE
         elim leading 0s  
+        make CLI to select between bin to dec or vice versa
 """
 # runtime: O(1) 
 # space:   O(1) 
