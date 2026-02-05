@@ -198,7 +198,15 @@ while user_input != 0:
 """
 TODO
     research optimal algorithms for his prob - practice those
-    
+        | Rank | Approach                        | Difficulty | Runtime  | Space Complexity      |
+        | ---- | ------------------------------- | ---------- | -------- | --------------------- |
+        | 1    | Bitwise shifting & masking      | 7/10       |  O(n)    |  O(1)                 |
+        | 2    | Positional math (powers of two) | 4/10       |  O(n)    |  O(1)                 |
+        | 3    | Built-in base conversion        | 2/10       |  O(n)    |  O(n)                 |
+        | 4    | Recursive decomposition         | 6/10       |  O(n)    |  O(n)                 |
+        | 5    | Lookup tables / FSM             | 8/10       |  O(n)    |  O(2ⁿ)  or  O(k)      |
+
+
     add functions:
         binary calculator 
         optimize code heavy
