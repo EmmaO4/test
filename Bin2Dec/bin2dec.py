@@ -182,7 +182,7 @@ while user_input != 0:
         convert_binary_to_decimal(binary_convert)
         break
     elif user_input == 2:
-        decimal_convert = str(input("Enter Decimal: "))
+        decimal_convert = int(input("Enter Decimal: "))
         convert_decimal_to_binary(decimal_convert)
         break
     else:
