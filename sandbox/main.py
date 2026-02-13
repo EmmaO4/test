@@ -1,4 +1,4 @@
-from bst import Node
+from LC.algos.bst import Node
 
 def main():
 
