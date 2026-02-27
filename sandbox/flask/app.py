@@ -5,11 +5,6 @@ from markupsafe import escape
 app = Flask(__name__)
 app.secret_key = "testing_key"
 
-# users = {
-#     'user1' : {'password_hash' : 'hashed_password1'},
-#     'user2' : {'password_hash' : 'hashed_password2'}
-# }
-
 users = {
     'user1': {'password_hash': generate_password_hash('1')},
     'user2': {'password_hash': generate_password_hash('2')}
@@ -41,32 +36,31 @@ def validate_login(username, password):
     return False
 
 def log_user_in(username):
+    user = users[username]
     session['username'] = username
+
     return redirect(url_for('user'))
 
 @app.route('/user')
 def user():
     if 'username' not in session:
         return redirect(url_for('login'))
-    return f"Welcome {session['username']}"
+    
+    return redirect(url_for('dashboard'))
 
-#####################################
+@app.route('/dashboard')
+def dashboard():
+    username = session.get('username')
+    modifier = 0
+    
+    return render_template('dashboard.html', username=username)
+
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.pop('username', None)
+
+    return redirect(url_for('login'))
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
-    pass
-
-@app.route('/about')
-def about():
-    return "about information"
-
-@app.route('/hello')
-@app.route('/hello/<name>')
-def hello(name=None):
-    return render_template('index.html', person = name)
-
-# with app.test_request_context():
-#     print(url_for('home'))
-#     print(url_for('login'))
-#     print(url_for('login', next='/'))
-#     print(url_for('profile', username='John Doe'))
+    return "registration page"

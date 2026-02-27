@@ -1,5 +1,7 @@
 study sessions
 learn about integrating cookies + persisting login states for set amount of time
+how to prevent manually typing URL to access user dashboard
+how to personalize dashboard to users
 make logout feature
 
 next: 
