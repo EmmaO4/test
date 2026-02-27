@@ -19,3 +19,5 @@ https://flask.palletsprojects.com/en/stable/quickstart/
         "flask --app app run"     OR  "flask run" IF .py file is named wsgi/app.py
     DEBUG mode
         "flask --app app run --debug"
+
+db - PostgreSQL
