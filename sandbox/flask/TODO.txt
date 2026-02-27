@@ -1,0 +1,6 @@
+study sessions
+learn about integrating cookies + persisting login states for set amount of time
+make logout feature
+
+next: 
+    PostgreSQL db implem
